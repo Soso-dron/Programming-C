@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[81];
+    
+    printf("Write your sms, no more 80 symbols: ");
+    fgets(str, sizeof(str), stdin);
+    str[strcspn(str, "\n")] = '\0';
+    
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] != ' ') { 
+            str[i] = str[i] ^ 32;
+        }
+    }
+    
+    printf("Results: %s\n", str);
+    
+    return 0;
+}

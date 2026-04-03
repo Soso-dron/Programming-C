@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+double* poor(double* a, double* b, int n, int m, char op){
+	double* r = (double*)malloc(n * m * sizeof(double));
+	for (int i = 0; i<n*m; i++){
+		if(op == '+') r[i] = a[i] + b[i];
+		if(op == '-') r[i] = a[i] - b[i];
+		if(op == '*') r[i] = a[i] * b[i];
+	}
+	return r;
+}
+int main(){
+	int n, m;
+	char op;
+	
+	printf("n m: ");
+	scanf("%d %d", &n, &m);
+	
+	double* a = (double*)malloc(n*m*sizeof(double));
+	double* b = (double*)malloc(n*m*sizeof(double));
+	
+	printf("A:\n");
+	for(int i = 0; i<n*m;i++){
+	scanf("%lf", &a[i]);
+	}
+	
+	printf("B:\n");
+	for(int i=0; i<n*m;i++){
+		scanf("%lf", &b[i]);
+	}
+	
+	printf("+, -, *: ");
+	scanf(" %c", &op);
+	
+	double* r = poor(a, b, n, m, op);
+	
+	printf("Result: \n");
+	for (int i = 0;i<n;i++){
+		for (int j=0;j<m;j++){
+			printf("%.2f", r[i * m +j]);
+		}
+		printf("\n");
+	}
+	free(a);
+	free(b);
+	free(r);
+	
+	return 0;
+}

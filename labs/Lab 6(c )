@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <string.h>
+#include <locale.h>
+#define MAX_LINE 1024
+
+int main() {
+    FILE *in, *out;
+    char line[MAX_LINE];
+    int found = 0;
+    setlocale(LC_ALL, "Russian");
+    in = fopen("input.txt", "r");
+    if (in == NULL) {
+        printf("Rerror open input.txt\n");
+        return 1;
+    }
+    
+    out = fopen("output.txt", "w");
+    if (out == NULL) {
+        printf("Rerror open output.txt\n");
+        fclose(in);
+        return 1;
+    }
+    
+    while (fgets(line, sizeof(line), in) != NULL) {
+        line[strcspn(line, "\n")] = '\0';
+        
+        if (strstr(line, "Петров") != NULL || strstr(line, "Петрова") != NULL) {
+            fprintf(out, "%s\n", line);
+            found++;
+        }
+    }
+    
+    fclose(in);
+    fclose(out);
+    
+    printf("Find: %d\n", found);
+
+    
+    return 0;
+}
